@@ -1,4 +1,5 @@
 <?php
+
 class User
 {
     private $name;
@@ -19,8 +20,23 @@ class User
             $this->$name = $value;
         }
     }
-    protected function NoticeFix()
+    public function NoticeFix($com="",$sym="",$doc="",$labs="")
     {
-        //
+        $doc->repDocId = date('dMY H:i:s');
+        $doc->symthom = $sym;
+        $doc->isDone = false;
+        $doc->tecnicalName = "Mr.Merlin";
+        //Search where computer was placed in
+        foreach($labs as $key => $lab){
+            foreach($lab->compList as $value){
+                //print_r($value);
+                if($value->comId == $com){
+                    printf("$com found in ".$lab->name."\n");
+                    $doc->labName = $lab->name;
+                    return $doc;
+                }
+            }
+        }
+        return "FAIL";
     }
 }

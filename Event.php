@@ -3,6 +3,7 @@ require_once("./Computer.php");
 require_once("./Laboratory.php");
 require_once("./Leader.php");
 require_once("./Technician.php");
+require_once('./RepairDoc.php');
 /*** Purchase No. of computer ***/
 $i = 1;
 $comTotal = 25;
@@ -46,4 +47,17 @@ printf("Arther is working on $artherDuty computer.\n");
 $artherComList = array_slice($comList,$startElement,$artherDuty);
 $arther->WorkOnDuty($artherComList,$roomTotal,$lab,$maxCompPerRoom);
 
-var_dump($lab);
+//var_dump($lab);
+
+/* User is create */
+$user = new User("Somchai");
+/* List of repair document */
+$docList = array();
+$doc = new RepairDoc();
+$doc = $user->NoticeFix("CPE5","Kernel crash",$doc,$lab);
+if($doc === "FAIL"){
+    printf("Cannot find your computer in any lab\n");
+}else{
+    array_push($docList,$doc);
+}
+var_dump($docList);
